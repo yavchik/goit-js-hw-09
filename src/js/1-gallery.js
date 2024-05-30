@@ -1,3 +1,6 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const images = [
   {
     preview:
@@ -66,14 +69,13 @@ const images = [
 
 const ulEl = document.querySelector('.gallery');
 
-function imageTemplate(item) {
+function imageTemplate({ preview, original, description } = images) {
   return `<li class="gallery-item">
-  <a class="gallery-link" href="${item.original}">
+  <a class="gallery-link" href="${original}">
     <img
       class="gallery-image"
-      src="${item.preview}"
-      data-source="${item.original}"
-      alt="${item.description}"
+      src="${preview}"
+      alt="${description}"
     />
   </a>
 </li>`;
@@ -91,4 +93,13 @@ imgLinkEl.forEach(function (link) {
   link.addEventListener('click', function (e) {
     e.preventDefault();
   });
+});
+
+let simplGallery = new SimpleLightbox('.gallery-link', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
+simplGallery.on('error.simplelightbox', function (e) {
+  console.log(e);
 });
