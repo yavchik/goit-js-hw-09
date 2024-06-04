@@ -88,18 +88,7 @@ function imagesTemplate(arr) {
 const markup = imagesTemplate(images);
 ulEl.innerHTML = markup;
 
-const imgLinkEl = document.querySelectorAll('.gallery-link');
-imgLinkEl.forEach(function (link) {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-  });
-});
-
 let simplGallery = new SimpleLightbox('.gallery-link', {
   captionsData: 'alt',
   captionDelay: 250,
-});
-
-simplGallery.on('error.simplelightbox', function (e) {
-  console.log(e);
 });
